@@ -54,7 +54,6 @@
 <script src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js"></script>
 
 
-
 <!-- Datatables -->
 <script src="<?php echo HOME_URI; ?>/views/_vendors/datatables.net/js/jquery.dataTables.min.js"></script>
 
@@ -122,8 +121,6 @@
                         {
                             extend: "pdfHtml5",
                             className: "btn-sm",
-
-
 
 
                         },
@@ -293,7 +290,6 @@
     });
 </script>
 <!-- /Skycons -->
-
 
 
 <!-- bootstrap-daterangepicker -->
@@ -499,6 +495,17 @@
         modal.find('.modal-body .id').val(recipient)
     });
 
+    $('#edit').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        var recipient_name = button.data('name') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-body .id').val(recipient)
+        modal.find('.modal-body .name').val(recipient_name)
+    });
+
 
     $("#btn-remove-yes").click(function () {
         var idToRemove = $('#id-to-remove').val();
@@ -517,6 +524,37 @@
                     var table = $('#datatable-buttons').DataTable();
 
                     table.row('.selected').remove().draw(false);
+                }
+            }
+        });
+    });
+
+    $("#btn-edit-yes").click(function () {
+        var nameToEdit = $('#name-to-edit').val();
+        var idToEdit = $('#id-to-edit').val();
+        idToEdit = idToEdit.trim();
+        var currentController = "<?php echo $_SESSION['currentController']?>/";
+        var currenttURL = "<?php echo HOME_URI ?>";
+        var operation = "edit/";
+        var serviceURL = currenttURL.concat(currentController, operation, idToEdit, "/", nameToEdit);
+
+        $("#edit").hide();
+
+        $.ajax({
+            url: serviceURL, success: function (result) {
+                if (result != "") {
+                    $("#edit").modal('hide');
+
+                    var table = $('#datatable-buttons').DataTable();
+
+
+                    var row = table.row('.selected');
+
+                    table.cell(row, 1).data(nameToEdit);
+
+                    table.draw(false);
+
+
                 }
             }
         });

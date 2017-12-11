@@ -56,4 +56,18 @@ class PessoaController extends MainController
     }
 
 
+    public function edit($data) {
+
+        $modelo = $this->load_model('pessoa');
+        $result = $modelo ->edit($data);
+        if ($result != null){
+            echo "OK";
+        }else{
+            echo "False";
+        }
+
+
+    }
+
+
 }

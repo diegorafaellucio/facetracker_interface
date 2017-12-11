@@ -73,7 +73,7 @@ class RelatorioController extends MainController
             $page_limit++;
 
             $image_path = ABSPATH . "/views/_images/faces/" . $row['face_path'];
-            $person_path = ABSPATH . "/views/_images/faces/" . $row['face_path'];
+            $person_path = ABSPATH . "/views/_images/train_faces/" . $row['person_path'];
 
 
             $pdf->Cell($w[0], 60, $pdf->Image($image_path, $pdf->GetX() + 30, $pdf->GetY() + 10, 33.78), "0", "0", "C");
@@ -134,7 +134,7 @@ class RelatorioController extends MainController
             $page_limit++;
 
             $image_path = ABSPATH . "/views/_images/faces/" . $row['face_path'];
-            $person_path = ABSPATH . "/views/_images/faces/" . $row['face_path'];
+            $person_path = ABSPATH . "/views/_images/train_faces/" . $row['person_path'];
 
 
             $pdf->Cell($w[0], 60, $pdf->Image($image_path, $pdf->GetX() + 30, $pdf->GetY() + 10, 33.78), "0", "0", "C");

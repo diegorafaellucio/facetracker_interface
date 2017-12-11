@@ -17,6 +17,11 @@
             <div class="count green"> <?php $modeloPessoa->totalAssociado() ?> </div>
         </div>
 
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-percent"></i> Percentual Médio de Acerto</span>
+            <div class="count green"> <?php $modeloPessoa->acertoMedio() ?>% </div>
+        </div>
+
     </div>
     <!-- /top tiles -->
 

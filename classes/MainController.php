@@ -4,7 +4,6 @@ class MainController extends UserLogin {
 
     public $db;
 
-    public $phpass;
 
     public $title;
 
@@ -19,7 +18,6 @@ class MainController extends UserLogin {
 
         $this->db = new DB();
 
-        $this->phpass = new PasswordHash(8, false);
 
         $this->parametros = $parametros;
 

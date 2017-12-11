@@ -1,12 +1,14 @@
 <?php
 
-class UserLogin {
+class UserLogin
+{
 
     public $logged_in;
     public $userdata;
     public $login_error;
 
-    public function check_userlogin() {
+    public function check_userlogin()
+    {
 
         if (isset($_SESSION['userdata']) && !empty($_SESSION['userdata']) && is_array($_SESSION['userdata']) && !isset($_POST['userdata'])
         ) {
@@ -58,7 +60,7 @@ class UserLogin {
         }
 
         $query = $this->db->query(
-                'SELECT * FROM users WHERE user = ? LIMIT 1', array($user)
+            'SELECT * FROM users WHERE user = ? LIMIT 1', array($user)
         );
 
         if (!$query) {
@@ -72,7 +74,7 @@ class UserLogin {
 
         $fetch = $query->fetch(PDO::FETCH_ASSOC);
 
-        $user_id = (int) $fetch['user_id'];
+        $user_id = (int)$fetch['user_id'];
 
         if (empty($user_id)) {
             $this->logged_in = false;
@@ -83,7 +85,7 @@ class UserLogin {
             return;
         }
 
-        if ($this->phpass->CheckPassword($user_password, $fetch['user_password'])) {
+        if ($this->checkPassword($user_password, $fetch['user_password'])) {
 
             if (session_id() != $fetch['user_session_id'] && !$post) {
                 $this->logged_in = false;
@@ -105,7 +107,7 @@ class UserLogin {
                 $_SESSION['userdata']['user_session_id'] = $session_id;
 
                 $query = $this->db->query(
-                        'UPDATE users SET user_session_id = ? WHERE user_id = ?', array($session_id, $user_id)
+                    'UPDATE users SET user_session_id = ? WHERE user_id = ?', array($session_id, $user_id)
                 );
             }
 
@@ -136,7 +138,8 @@ class UserLogin {
         }
     }
 
-    protected function logout($redirect = false) {
+    protected function logout($redirect = false)
+    {
         $_SESSION['userdata'] = array();
 
         unset($_SESSION['userdata']);
@@ -148,7 +151,8 @@ class UserLogin {
         }
     }
 
-    protected function goto_login() {
+    protected function goto_login()
+    {
         if (defined('HOME_URI')) {
             $login_uri = HOME_URI . '/login/';
 
@@ -166,7 +170,8 @@ class UserLogin {
      *
      * @final
      */
-    final protected function goto_page($page_uri = null) {
+    final protected function goto_page($page_uri = null)
+    {
         if (isset($_GET['url']) && !empty($_GET['url']) && !$page_uri) {
             // Configura a URL
             $page_uri = urldecode($_GET['url']);
@@ -189,8 +194,9 @@ class UserLogin {
      * @final
      */
     final protected function check_permissions(
-    $required = 'any', $user_permissions = array('any')
-    ) {
+        $required = 'any', $user_permissions = array('any')
+    )
+    {
         if (!is_array($user_permissions)) {
             return;
         }
@@ -202,6 +208,18 @@ class UserLogin {
         } else {
             return true;
         }
+    }
+
+    function checkPassword($pass, $database_pass)
+    {
+        $md5_pass = md5($pass);
+        if ($md5_pass == $database_pass) {
+            return true;
+        } else {
+            return false;
+        }
+
+
     }
 
 }

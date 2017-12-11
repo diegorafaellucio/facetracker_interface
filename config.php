@@ -7,7 +7,7 @@ define( 'HOME_URI', 'http://face.local/' );
 
 define( 'HOSTNAME', 'localhost' );
 
-define( 'DB_NAME', 'face' );
+define( 'DB_NAME', 'face_correction' );
 
 define( 'DB_USER', 'root' );
 

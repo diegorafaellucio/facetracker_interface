@@ -33,12 +33,12 @@ class Foto extends MainModel
 
             if ($row["pertence_ao_grupo"] == 1) {
                 $style = " style=\"color: #00FF00\" ";
-                $button_up = "<a href = \"#\"><i id='button-up-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 1)' class=\"fa fa-thumbs-up\" " . $style . "></i></a>";
-                $button_down = "<a  href = \"#\"><i id='button-down-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 0)' class=\"fa fa-thumbs-down\"></i></a>";
+                $button_up = "<a href = \"javascript:void(0)\"><i id='button-up-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 1)' class=\"fa fa-thumbs-up\" " . $style . "></i></a>";
+                $button_down = "<a  href = \"javascript:void(0)\"><i id='button-down-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 0)' class=\"fa fa-thumbs-down\"></i></a>";
             } else {
                 $style = " style=\"color:#ff0000\" ";
-                $button_up = "<a   href = \"#\"><i id='button-up-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 1)' class=\"fa fa-thumbs-up\"></i></a>";
-                $button_down = "<a   href = \"#\"><i id='button-down-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 0)' class=\"fa fa-thumbs-down\" " . $style . "></i></a>";
+                $button_up = "<a   href = \"javascript:void(0)\"><i id='button-up-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 1)' class=\"fa fa-thumbs-up\"></i></a>";
+                $button_down = "<a   href = \"javascript:void(0)\"><i id='button-down-" . $row["id"] . "' onclick='updateAttribuition(" . $row["id"] . ", 0)' class=\"fa fa-thumbs-down\" " . $style . "></i></a>";
             }
 
             $content .= "

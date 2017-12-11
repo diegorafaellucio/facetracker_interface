@@ -45,7 +45,7 @@ class Pessoa extends MainModel
 
         foreach ($query as $row) {
 
-            $edit_button = '<button style="float: right;" type="button" class="btn btn-default btn-edit" data-toggle="modal" data-target="#edit" data-whatever="' . $row['id'] . '">
+            $edit_button = '<button style="float: right;" type="button" class="btn btn-default btn-edit" data-toggle="modal" data-target="#edit" data-name="' . $row['nome'] . '" data-whatever="' . $row['id'] . ' ">
             <span class="fa fa-pencil"></span> Editar
         </button>';
 
@@ -57,7 +57,7 @@ class Pessoa extends MainModel
             $itens .= "<tr> 
                                <td>" . $row["id"] . "</td> 
                                <td>" . $row["nome"] . "</td> 
-                               <td>". $edit_button . $remove_button ."</td> 
+                               <td>" . $edit_button . $remove_button . "</td> 
                            </tr>";
 
         }
@@ -74,9 +74,19 @@ class Pessoa extends MainModel
 
     }
 
-    public function remove() {
-        $parametros = ( func_num_args() >= 1 ) ? func_get_arg(0) : array();
-        $query = $this->db->delete("pessoa","id", $parametros[0]);
+    public function remove()
+    {
+        $parametros = (func_num_args() >= 1) ? func_get_arg(0) : array();
+        $query = $this->db->delete("pessoa", "id", $parametros[0]);
+        return $query;
+
+    }
+
+
+    public function edit()
+    {
+        $parametros = (func_num_args() >= 1) ? func_get_arg(0) : array();
+        $query = $this->db->update("pessoa", "id", $parametros[0], array("nome" => $parametros[1]));
         return $query;
 
     }
@@ -91,7 +101,7 @@ class Pessoa extends MainModel
 
         foreach ($query as $row) {
 
-        $total = $row["total"];
+            $total = $row["total"];
 
         }
         echo $total;
@@ -110,7 +120,24 @@ class Pessoa extends MainModel
 
         }
         echo $total;
+
+
     }
 
+    public function acertoMedio()
+    {
+        $query = $this->db->query("select avg(percentual_de_acerto) as media from face");
 
+        $total = "";
+
+
+        foreach ($query as $row) {
+
+            $total = $row["media"];
+
+        }
+        echo number_format($total, 2, ",",".");
+
+
+    }
 }

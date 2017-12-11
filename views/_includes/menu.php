@@ -2,6 +2,7 @@
 
 <?php if ($this->login_required && !$this->logged_in) return; ?>
 
+<body class="nav-md">
 
 <div class="container body">
     <div class="main_container">
