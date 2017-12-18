@@ -56,7 +56,7 @@ class Face extends MainModel
 
     public function getRelItens($date_params)
     {
-        $query = $this->db->query("select p.nome, f.percentual_de_acerto, concat(ff.id_face,'/',ff.nome,'.',ff.extensao) as face_path, concat(p.id,'/',(select nome from face_foto foto left join face face on face.id = foto.id_face where  pertence_ao_grupo <> 0 and classificacao_fornecida_pelo_sistema = f.classificacao_fornecida_pelo_sistema limit 1),'.',ff.extensao) as person_path from face f join pessoa p on f.classificacao_fornecida_pelo_sistema = p.id join face_foto ff on ff.id_face = f.id where year(f.dh_inserted) = '$date_params[2]' and month(f.dh_inserted) = '$date_params[1]' and day(f.dh_inserted) = '$date_params[0]' and pertence_ao_grupo <> 0  group by id_face");
+        $query = $this->db->query("select p.nome, f.percentual_de_acerto, concat(ff.id_face,'/',ff.nome,'.',ff.extensao) as face_path, CONCAT(p.id, '/', (SELECT nome FROM face JOIN face_foto ON id_face = face.id WHERE face.classificacao_fornecida_pelo_usuario = p.id AND pertence_ao_grupo <> 0 LIMIT 1), '.', ff.extensao) AS person_path from face f join pessoa p on f.classificacao_fornecida_pelo_sistema = p.id join face_foto ff on ff.id_face = f.id where year(f.dh_inserted) = '$date_params[2]' and month(f.dh_inserted) = '$date_params[1]' and day(f.dh_inserted) = '$date_params[0]' and pertence_ao_grupo <> 0  group by id_face");
 
 
         $response = array();
@@ -91,7 +91,7 @@ class Face extends MainModel
 
     public function getRelElements($date_params)
     {
-        $query = $this->db->query("select p.nome, f.percentual_de_acerto, concat(ff.id_face,'/',ff.nome,'.',ff.extensao) as face_path, concat(p.id,'/',(select nome from face_foto foto left join face face on face.id = foto.id_face where  pertence_ao_grupo <> 0 and classificacao_fornecida_pelo_sistema = f.classificacao_fornecida_pelo_sistema limit 1),'.',ff.extensao) as person_path from face f join pessoa p on f.classificacao_fornecida_pelo_sistema = p.id join face_foto ff on ff.id_face = f.id where year(f.dh_inserted) = '$date_params[2]' and month(f.dh_inserted) = '$date_params[1]' and day(f.dh_inserted) = '$date_params[0]' and pertence_ao_grupo <> 0  group by id_face");
+        $query = $this->db->query("select p.nome, f.percentual_de_acerto, concat(ff.id_face,'/',ff.nome,'.',ff.extensao) as face_path, CONCAT(p.id, '/', (SELECT nome FROM face JOIN face_foto ON id_face = face.id WHERE face.classificacao_fornecida_pelo_usuario = p.id AND pertence_ao_grupo <> 0 LIMIT 1), '.', ff.extensao) AS person_path from face f join pessoa p on f.classificacao_fornecida_pelo_sistema = p.id join face_foto ff on ff.id_face = f.id where year(f.dh_inserted) = '$date_params[2]' and month(f.dh_inserted) = '$date_params[1]' and day(f.dh_inserted) = '$date_params[0]' and pertence_ao_grupo <> 0  group by id_face");
 
         return $query;
 
@@ -99,7 +99,7 @@ class Face extends MainModel
 
     public function getRelVideoElements($id)
     {
-        $query = $this->db->query("select p.nome, f.percentual_de_acerto, concat(ff.id_face,'/',ff.nome,'.',ff.extensao) as face_path, concat(p.id,'/',(select nome from face_foto foto left join face face on face.id = foto.id_face where  pertence_ao_grupo <> 0 and classificacao_fornecida_pelo_sistema = f.classificacao_fornecida_pelo_sistema limit 1),'.',ff.extensao) as person_path from face f join pessoa p on f.classificacao_fornecida_pelo_sistema = p.id join face_foto ff on ff.id_face = f.id where f.video = '$id' group by id_face");
+        $query = $this->db->query("select p.nome, f.percentual_de_acerto, concat(ff.id_face,'/',ff.nome,'.',ff.extensao) as face_path, CONCAT(p.id, '/', (SELECT nome FROM face JOIN face_foto ON id_face = face.id WHERE face.classificacao_fornecida_pelo_usuario = p.id AND pertence_ao_grupo <> 0 LIMIT 1), '.', ff.extensao) AS person_path from face f join pessoa p on f.classificacao_fornecida_pelo_sistema = p.id join face_foto ff on ff.id_face = f.id where f.video = '$id' group by id_face");
 
         return $query;
 

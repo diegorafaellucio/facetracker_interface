@@ -2916,7 +2916,8 @@ ul.project_files li a i {
   font-size: 17px;
   padding: 3px;
   background: rgba(0, 0, 0, 0.35);
-  margin: -42px 0 0 0; }
+  margin: -42px 0 0 0;
+}
 
 .mask.no-caption .tools {
   margin: 90px 0 0 0; }
@@ -2924,7 +2925,7 @@ ul.project_files li a i {
 .view .tools a {
   display: inline-block;
   color: #FFF;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 400;
   padding: 0 4px; }
 

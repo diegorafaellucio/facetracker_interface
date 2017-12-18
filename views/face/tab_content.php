@@ -4,7 +4,10 @@
 <div class="tab-pane active" id="<?php echo $data[0] ?>">
     <div class="col-md-12">
         <div>
-            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right">
+            <div class="col-md-5 col-sm-5 col-xs-3 pull-left">
+                <h3 class="title_left"><?php echo $data[0] ?></h3>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-9 form-group pull-right">
                 <div class="input-group">
                     <select id="person_select" class="form-control" required>
 
@@ -71,7 +74,7 @@
 
         if (nameToAdd != "") {
 
-            var serviceURL = "<?php echo HOME_URI; ?>pessoa/add/" + nameToAdd + "/"+ <?php echo $data[0]?> + "/"+ <?php echo $data[1]?>;
+            var serviceURL = "<?php echo HOME_URI; ?>pessoa/add/" + nameToAdd + "/" + <?php echo $data[0]?> +"/" + <?php echo $data[1]?>;
 
             $.ajax({
                 url: serviceURL, success: function (result) {

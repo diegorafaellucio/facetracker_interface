@@ -472,6 +472,7 @@
     function updateTabContent(id, identifiedPerson) {
 
         $("#tab-content").load("<?php echo HOME_URI;?>face/tabcontent/" + id + "/" + identifiedPerson);
+        $("html, body").animate({ scrollTop: 0 }, "slow");
 
     }
 

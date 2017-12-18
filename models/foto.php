@@ -44,7 +44,7 @@ class Foto extends MainModel
             $content .= "
             <div class=\"col-md-55\">
                 <div class=\"thumbnail\">
-                    <div class=\"image view view-first\" >
+                    <div class=\"image view \" >
                         <img style = \"width: 100%; display: block;\"
                         src=\"".HOME_URI."views/_images/faces/" . $row["id_face"] . "/" . $row["nome"] . "." . $row["extensao"] . "\" alt=\"\"/>
                         <div class=\"tools tools-bottom\" >" .
